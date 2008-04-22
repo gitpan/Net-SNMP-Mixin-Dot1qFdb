@@ -59,11 +59,11 @@ Net::SNMP::Mixin::Dot1qFdb - mixin class for 802.1-Q switch forwarding databases
 
 =head1 VERSION
 
-Version 0.01_01
+Version 0.01_02
 
 =cut
 
-our $VERSION = '0.01_01';
+our $VERSION = '0.01_02';
 
 =head1 SYNOPSIS
 

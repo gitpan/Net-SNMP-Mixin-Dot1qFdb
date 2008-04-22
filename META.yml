@@ -1,6 +1,6 @@
 ---
 name: Net-SNMP-Mixin-Dot1qFdb
-version: 0.01_01
+version: 0.01_02
 author:
   - 'Karl Gaissmaier <karl.gaissmaier (at) uni-ulm.de>'
 abstract: mixin class for 802.1-Q switch forwarding databases
@@ -18,7 +18,7 @@ build_requires:
 provides:
   Net::SNMP::Mixin::Dot1qFdb:
     file: lib/Net/SNMP/Mixin/Dot1qFdb.pm
-    version: 0.01_01
+    version: 0.01_02
 generated_by: Module::Build version 0.2808
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

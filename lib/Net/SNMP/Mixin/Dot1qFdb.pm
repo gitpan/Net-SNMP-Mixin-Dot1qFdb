@@ -42,28 +42,17 @@ use constant {
   DOT1Q_VLAN_CURRENT_FDB_ID => '1.3.6.1.2.1.17.7.1.4.2.1.3',
 };
 
-#
-# The port's current state translation table
-#
-my %fdp_entry_status_enum = (
-  1 => 'other',
-  2 => 'invalid',
-  3 => 'learned',
-  4 => 'self',
-  5 => 'mgmt',
-);
-
 =head1 NAME
 
 Net::SNMP::Mixin::Dot1qFdb - mixin class for 802.1-Q switch forwarding databases
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -150,20 +139,31 @@ sub get_dot1q_fdb_entries {
   Carp::croak "'$prefix' not initialized,"
     unless $session->{$prefix}{__initialized};
 
+  #
+  # the port's current state translation table
+  #
+  my %fdp_entry_status_enum = (
+    1 => 'other',
+    2 => 'invalid',
+    3 => 'learned',
+    4 => 'self',
+    5 => 'mgmt',
+  );
+
   # stash for return values
   my @fdb_entries = ();
 
   my ( @digits, $fdb_id, $vlan_id, $mac, $mac_string, $port, $status,
     $status_string );
 
-  # index is fdbId.MacAddress, value is the bridge port
+  # index is fdbId.MacAddress
   foreach my $idx ( keys %{ $session->{$prefix}{dot1qTpFdbPort} } ) {
     $port   = $session->{$prefix}{dot1qTpFdbPort}{$idx};
     $status = $session->{$prefix}{dot1qTpFdbStatus}{$idx};
 
     $status_string = $fdp_entry_status_enum{$status};
 
-    # the snmp table get isn't a snapshot, it can be, that
+    # the snmp get_table() isn't a snapshot, it can be, that
     # the MAC has already timeout in the FDB when the
     # status is fetched
     next unless defined $port && defined $status;

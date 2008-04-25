@@ -1,5 +1,8 @@
 Revision history for Net-SNMP-Mixin-Dot1qFdb
 
+0.03	Fr 25. Apr 19:47:20 CEST 2008
+	small internal changes
+
 0.02	Mi 23. Apr 09:24:58 CEST 2008
 	First production release
 	grml, again Build.PL tweaks

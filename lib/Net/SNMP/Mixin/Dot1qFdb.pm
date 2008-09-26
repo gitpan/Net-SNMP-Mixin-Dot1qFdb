@@ -48,11 +48,11 @@ Net::SNMP::Mixin::Dot1qFdb - mixin class for 802.1-Q switch forwarding databases
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
@@ -161,12 +161,12 @@ sub get_dot1q_fdb_entries {
     $port   = $session->{$prefix}{dot1qTpFdbPort}{$idx};
     $status = $session->{$prefix}{dot1qTpFdbStatus}{$idx};
 
-    $status_string = $fdp_entry_status_enum{$status};
-
     # the snmp get_table() isn't a snapshot, it can be, that
     # the MAC has already timeout in the FDB when the
     # status is fetched
     next unless defined $port && defined $status;
+
+    $status_string = $fdp_entry_status_enum{$status};
 
     # split the idx to fdb_id and mac address
     # index is fdbId.MacAddress, value is the bridge port
